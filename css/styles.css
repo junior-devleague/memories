@@ -1,0 +1,13 @@
+.row{
+  display: flex;
+  justify-content: center;
+}
+.card{
+  width: 150px;
+  height: 200px;
+  margin: 10px;
+  transition: all 1s ease-in-out;
+  background-color: red;
+  background-image: url('../assets/back.jpg');
+  background-size: cover;
+}
