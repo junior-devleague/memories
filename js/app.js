@@ -1,45 +1,57 @@
 var turned = [];
-var pic=[1,1,2,2,3,3,4,4];
 var ids = ["one","two","three","four","five","six","seven","eight"];
 var pair = [];
 var points = 0;
-for (var i = 0; i < 8; i++) {
-	var randomNumber =  Math.floor(Math.random() * (pic.length));
-	console.log(pic[randomNumber]);
-	var back=document.getElementsByClassName("back")[i];
-	back.style.backgroundImage = "url('./assets/"+pic[randomNumber]+".png')";
-	pair.push([ids[i],pic[randomNumber]]);
-	pic.splice(randomNumber, 1);
-}
-var count = 30;
 var timeStarted = false;
+var count = 30;
+
+var idTime =document.getElementById("time");
+var idPoint=document.getElementById("points");
+var idfinish = document.getElementById("finish");
+var idStart = document.getElementById("start");
+function setup(){
+	pair=[];
+	var pic=[1,1,2,2,3,3,4,4];
+	for (var i = 0; i < 8; i++) {
+		document.getElementById(ids[i]).style.display="inline";
+		var randomNumber =  Math.floor(Math.random() * (pic.length));
+		document.getElementsByClassName("back")[i]style.backgroundImage = "url('./assets/"+pic[randomNumber]+".png')";
+		pair.push([ids[i],pic[randomNumber]]);
+		pic.splice(randomNumber, 1);
+	}
+}
+setup();
 function clock(){
-	if(count==0){
+	if(points==4&&count>0||count==0){
 		clearInterval(clock);
 	}
 	else{
 		count-=1;
 		if(count<10){
-			document.getElementById("time").innerHTML="Time: 0:0"+count;
+			idTime.innerHTML="Time: 0:0"+count;
 		}
 		else{
-			document.getElementById("time").innerHTML="Time: 0:"+count;
+			idTime.innerHTML="Time: 0:"+count;
 		}
 	}
 }
 function start(){
 	started=true;
-	document.getElementById("start").parentNode.removeChild(document.getElementById("start"));
+	idStart.parentNode.removeChild(idStart);
 	document.getElementById("container").style.filter="blur(0px)";
-
 }
 function finish(){
-	document.getElementById("finish").style.display="none";
-	started==true;
+	idfinish.style.display="none";
+	started=true;
+	setup();
+	idTime.innerHTML="Time: 0:30";
+	idPoint.innerHTML="Correct: 0";
+	points=0;
+	count=30;
 }
 function press(idName) {
 	if(started==true){
-		if (timeStarted==false){
+		if (timeStarted==false&&count==30){
 				timeStarted=true;
 				var time =setInterval(clock, 1000);
 		}
@@ -62,10 +74,11 @@ function press(idName) {
 					first.style.display="none";
 					second.style.display="none";
 					points += 1;
-					document.getElementById("points").innerHTML="Correct: "+points;
-					if(points==4){
-						document.getElementById("finish").style.display='inline';
-///////////////////////////////////////
+					idPoint.innerHTML="Correct: "+points;
+					if(points==4&&count>0){
+						started=false;
+						idfinish.innerHTML="WOW YOU'RE SO GOOD WOW<br>You're Time: "+count+" seconds!<br><button id='finishBut' onclick='finish()''>AGAIN!</button>";
+						idfinish.style.display='inline';
 					}
 				}
 				turned = [];
