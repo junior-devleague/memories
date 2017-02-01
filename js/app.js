@@ -11,29 +11,65 @@ for (var i = 0; i < 8; i++) {
 	pair.push([ids[i],pic[randomNumber]]);
 	pic.splice(randomNumber, 1);
 }
-function press(idName) {
-	var box = document.getElementById(idName);
-	box.style.transform = 'rotateY(180deg)';
-	if((turned[0]==idName||turned[1]==idName)==false)
-	{
-		turned.push(idName);
+var count = 30;
+var timeStarted = false;
+function clock(){
+	if(count==0){
+		clearInterval(clock);
 	}
-	if(turned.length == 2){
-		setTimeout(function(){
-			var first =document.getElementById(turned[0]);
-			var second =document.getElementById(turned[1]);
-			var x =ids.indexOf(turned[0]);
-			var y =ids.indexOf(turned[1]);
-			first.style.transform = 'rotateY(0deg)';
-			second.style.transform = 'rotateY(0deg)';
-			if(pair[x][1]==pair[y][1])
-			{
-				first.parentNode.removeChild(first);
-				second.parentNode.removeChild(second);
-				points += 1;
-				document.getElementById("points").innerHTML="Correct: "+points;
-			}
-			turned = [];
-		}, 400);
+	else{
+		count-=1;
+		if(count<10){
+			document.getElementById("time").innerHTML="Time: 0:0"+count;
+		}
+		else{
+			document.getElementById("time").innerHTML="Time: 0:"+count;
+		}
+	}
+}
+function start(){
+	started=true;
+	document.getElementById("start").parentNode.removeChild(document.getElementById("start"));
+	document.getElementById("container").style.filter="blur(0px)";
+
+}
+function finish(){
+	document.getElementById("finish").style.display="none";
+	started==true;
+}
+function press(idName) {
+	if(started==true){
+		if (timeStarted==false){
+				timeStarted=true;
+				var time =setInterval(clock, 1000);
+		}
+		var box = document.getElementById(idName);
+		box.style.transform = 'rotateY(180deg)';
+		if((turned[0]==idName||turned[1]==idName)==false)
+		{
+			turned.push(idName);
+		}
+		if(turned.length == 2){
+			setTimeout(function(){
+				var first =document.getElementById(turned[0]);
+				var second =document.getElementById(turned[1]);
+				var x =ids.indexOf(turned[0]);
+				var y =ids.indexOf(turned[1]);
+				first.style.transform = 'rotateY(0deg)';
+				second.style.transform = 'rotateY(0deg)';
+				if(pair[x][1]==pair[y][1])
+				{
+					first.style.display="none";
+					second.style.display="none";
+					points += 1;
+					document.getElementById("points").innerHTML="Correct: "+points;
+					if(points==4){
+						document.getElementById("finish").style.display='inline';
+///////////////////////////////////////
+					}
+				}
+				turned = [];
+			}, 400);
+		}
 	}
 }

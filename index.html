@@ -6,46 +6,57 @@
   <link rel="stylesheet" type="text/css" href="./css/styles.css">
 </head>
 <body>
-  <h1 onclick="k()">Match Maker</h1>
-  <h2 id = "points">Correct: 0</h2>
-  <h2 id = "time">Time: 1:00</h2>
-  <div class="row">
-    <div id="one" class="card" onclick="press(this.id)">
-      <div class="front"></div>
-      <div class="back"></div>
+  <div id="container">
+    <h1 onclick="k()">Match Maker</h1>
+    <h2 id = "points">Correct: 0</h2>
+    <h2 id = "time">Time: 0:30</h2>
+    <div class="row">
+      <div id="one" class="card" onclick="press(this.id)">
+        <div class="front"></div>
+        <div class="back"></div>
+      </div>
+      <div id="two" class="card" onclick="press(this.id)">
+        <div class="front"></div>
+        <div class="back"></div>
+      </div>
+      <div id="three" class="card" onclick="press(this.id)">
+        <div class="front"></div>
+        <div class="back"></div>
+      </div>
+      <div id="four" class="card" onclick="press(this.id)">
+        <div class="front"></div>
+        <div class="back"></div>
+      </div>
     </div>
-    <div id="two" class="card" onclick="press(this.id)">
-      <div class="front"></div>
-      <div class="back"></div>
-    </div>
-    <div id="three" class="card" onclick="press(this.id)">
-      <div class="front"></div>
-      <div class="back"></div>
-    </div>
-    <div id="four" class="card" onclick="press(this.id)">
-      <div class="front"></div>
-      <div class="back"></div>
+    <div class="row">
+      <div id="five" class="card" onclick="press(this.id)">
+        <div class="front"></div>
+        <div class="back"></div>
+      </div>
+      <div id="six" class="card" onclick="press(this.id)">
+        <div class="front"></div>
+        <div class="back"></div>
+      </div>
+      <div id="seven" class="card" onclick="press(this.id)">
+        <div class="front"></div>
+        <div class="back"></div>
+      </div>
+      <div id="eight" class="card" onclick="press(this.id)">
+        <div class="front"></div>
+        <div class="back"></div>
+      </div>
     </div>
   </div>
-  <div class="row">
-    <div id="five" class="card" onclick="press(this.id)">
-      <div class="front"></div>
-      <div class="back"></div>
-    </div>
-    <div id="six" class="card" onclick="press(this.id)">
-      <div class="front"></div>
-      <div class="back"></div>
-    </div>
-    <div id="seven" class="card" onclick="press(this.id)">
-      <div class="front"></div>
-      <div class="back"></div>
-    </div>
-    <div id="eight" class="card" onclick="press(this.id)">
-      <div class="front"></div>
-      <div class="back"></div>
-    </div>
+  <div id="start" class="msg">
+    Are you ready to match some cards?
+    <br>
+    <button id="startBut" onclick="start()">Start!</button>
   </div>
-
+  <div id="finish" class="msg">
+    WOW YOU'RE SO GOOD WOW
+    <br>
+    <button id="finishBut" onclick="finish()">AGAIN!</button>
+  </div>
 </body>
 <script type="text/javascript" src="./js/app.js"></script>
 </html>
